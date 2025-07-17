@@ -27,11 +27,33 @@
         </hgroup>
     </header>
     <main class="container">
-        app goes here
+        <section>
+            <h2>Category Counts</h2>
+            <hr />
+            <div id="categoryCounts"></div>
+        </section>
     </main>
     <footer class="container align-footer">
         <small>Go from here to know me <a href="https://github.com/Sourabhpande532">Github</a></small>
     </footer>
+    <script>
+        const matchCategory = ( category ) => {
+            const x = vibeBoardDB( { category: category } ).count();
+            const showHtml = `<p>Total Gify in ${ category }: ${ x }</p>`
+            return showHtml;
+        }
+        const displayCategoryCount = () => {
+            const category = ["Reaction", "Cute", "Meme", "Other"];
+            const categoryCount = document.getElementById( "categoryCounts" );
+            const resultCount = category.map( matchCategory );
+            categoryCount.innerHTML = resultCount.join( "" );
+        }
+
+        function showGify() {
+            displayCategoryCount();
+        }
+        document.addEventListener( "DOMContentLoaded", showGify )
+    </script>
 </body>
 
 </html>
