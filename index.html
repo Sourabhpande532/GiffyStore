@@ -32,25 +32,45 @@
             <hr />
             <div id="categoryCounts"></div>
         </section>
+        <section>
+            <h2>Recent Gifs</h2>
+            <hr>
+            <div id="showGifs"></div>
+        </section>
     </main>
     <footer class="container align-footer">
         <small>Go from here to know me <a href="https://github.com/Sourabhpande532">Github</a></small>
     </footer>
     <script>
         const matchCategory = ( category ) => {
-            const x = vibeBoardDB( { category: category } ).count();
-            const showHtml = `<p>Total Gify in ${ category }: ${ x }</p>`
+            const count = vibeBoardDB( { category: category } ).count();
+            const showHtml = `<p>Total Gify in ${ category }: ${ count }</p>`
             return showHtml;
         }
         const displayCategoryCount = () => {
-            const category = ["Reaction", "Cute", "Meme", "Other"];
+            const categories = ["Reaction", "Cute", "Meme", "Other"];
             const categoryCount = document.getElementById( "categoryCounts" );
-            const resultCount = category.map( matchCategory );
+            const resultCount = categories.map( matchCategory );
             categoryCount.innerHTML = resultCount.join( "" );
+        }
+
+        const list = ( gifs ) => {
+            return `<article>
+                <img src=${ gifs.gif_url } alt="dbImage"/>
+                <p>💖${ gifs.likes }</p>
+                </article>`
+        }
+
+        function displayGifs() {
+            const importData = vibeBoardDB().get();
+            const resultGifs = document.getElementById( "showGifs" );
+            const listDown = importData.map( list );
+            resultGifs.innerHTML = listDown.join( "" )
         }
 
         function showGify() {
             displayCategoryCount();
+            displayGifs()
         }
         document.addEventListener( "DOMContentLoaded", showGify )
     </script>
