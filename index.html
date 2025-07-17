@@ -35,7 +35,7 @@
         <section>
             <h2>Recent Gifs</h2>
             <hr>
-            <div id="showGifs"></div>
+            <div id="showGifs" class="card-style"></div>
         </section>
     </main>
     <footer class="container align-footer">
@@ -54,17 +54,17 @@
             categoryCount.innerHTML = resultCount.join( "" );
         }
 
-        const list = ( gifs ) => {
-            return `<article>
-                <img src=${ gifs.gif_url } alt="dbImage"/>
-                <p>💖${ gifs.likes }</p>
+        const gifCards = ( gifs ) => {
+            return `<article class="article-style">
+                <img class="img-style" src=${ gifs.gif_url } alt="dbImage"/>
+                <span class="top-space">💖${ gifs.likes }</span>
                 </article>`
         }
 
         function displayGifs() {
             const importData = vibeBoardDB().get();
             const resultGifs = document.getElementById( "showGifs" );
-            const listDown = importData.map( list );
+            const listDown = importData.map( gifCards );
             resultGifs.innerHTML = listDown.join( "" )
         }
 

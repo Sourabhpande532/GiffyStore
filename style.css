@@ -1,4 +1,38 @@
+html,
+body {
+  height: 100%;
+  margin: auto;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+}
+
 .align-footer {
   text-align: center;
   color: var(--muted, #666);
+}
+
+.card-style {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.img-style {
+  width: 300px;
+  height: 300px;
+}
+.top-space {
+  padding-top: 10px;
+}
+.article-style {
+  display: flex;
+  flex-direction: column;
+  max-width: 335px;
+  margin-right: 20px;
 }
