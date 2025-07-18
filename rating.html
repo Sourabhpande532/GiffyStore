@@ -1,0 +1,56 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Rated Gifs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/taffydb@2.7.3/taffy-min.min.js"></script>
+    <script src="js/global-taffy-sync.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category.html">Category</a></li>
+                <li><a href="rating.html">Rating</a></li>
+            </ul>
+        </nav>
+        <hgroup>
+            <h1>Top Rated GIFs</h1>
+            <hr>
+        </hgroup>
+    </header>
+    <main class="container">
+        <section>
+            <h3>See Below</h3>
+            <div id="showTopRated"></div>
+        </section>
+    </main>
+    <script>
+        const $ = ( id ) => document.getElementById( id )
+        const getGifs = ( ratedCard ) => {
+            const { title, gif_url, rating } = ratedCard;
+            return `<article>
+               <img src=${ gif_url } alt=${ title } class="img-style"/> 
+               <p>${ title }</p>
+                <span>⭐ ${ rating }</span>
+            </article>`
+        }
+        const displayGifs = () => {
+            const resultRated = $( "showTopRated" );
+            const databaseData = vibeBoardDB( { rating: { gt: 3 } } ).get();
+            const generateGifs = databaseData.map( getGifs );
+            resultRated.innerHTML = generateGifs.join( "" );
+        }
+        const showTopRatedGifs = () => {
+            displayGifs()
+        }
+        document.addEventListener( "DOMContentLoaded", showTopRatedGifs )
+    </script>
+</body>
+
+</html>
