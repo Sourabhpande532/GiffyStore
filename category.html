@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Category View</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/taffydb@2.7.3/taffy-min.min.js"></script>
+    <script src="js/global-taffy-sync.js"></script>
+</head>
+
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category.html">Category</a></li>
+            </ul>
+        </nav>
+        <hgroup>
+            <h1>Category View</h1>
+            <hr>
+        </hgroup>
+        <main class="container">
+            <section>
+                <label for="">Select Category</label>
+                <select id="categorySelect">
+                    <option>Reaction</option>
+                    <option>Cute</option>
+                    <option>Meme</option>
+                    <option>Other</option>
+                </select>
+                <button id="processGifs">Show Gifs</button>
+            </section>
+            <section>
+                <h2>Gifs In Category</h2>
+                <div id="showGifsCard"></div>
+            </section>
+        </main>
+    </header>
+</body>
+
+</html>
