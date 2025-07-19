@@ -17,6 +17,8 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="category.html">Category</a></li>
                 <li><a href="rating.html">Rating</a></li>
+                <li><a href="likes.html">Likes</a></li>
+                <li><a href="add-gif.html">Add Gifs</a></li>
             </ul>
         </nav>
         <hgroup>
@@ -27,14 +29,14 @@
     <main class="container">
         <section>
             <h3>See Below</h3>
-            <div id="showTopRated"></div>
+            <div id="showTopRated" class="card-style"></div>
         </section>
     </main>
     <script>
         const $ = ( id ) => document.getElementById( id )
         const getGifs = ( ratedCard ) => {
             const { title, gif_url, rating } = ratedCard;
-            return `<article>
+            return `<article class="article-style">
                <img src=${ gif_url } alt=${ title } class="img-style"/> 
                <p>${ title }</p>
                 <span>⭐ ${ rating }</span>
