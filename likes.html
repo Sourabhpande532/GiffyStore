@@ -9,6 +9,7 @@
         integrity="sha512-I3KIbrc6Lyw3nPkuLS392xtKZRhzPWmQi9rWLfGGAOVS/mqAjz46v57CvD1UJNDOSqvLwJ2FOThVwtOQ9khNmg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/global-taffy-sync.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <header class="container">
     <nav>
@@ -17,6 +18,7 @@
             <li><a href="category.html">Category</a></li>
             <li><a href="rating.html">Rating</a></li>
             <li><a href="likes.html">Likes</a></li>
+            <li><a href="add-gif.html">Add Gifs</a></li>
         </ul>
     </nav>
 </header>
@@ -35,7 +37,7 @@
         <button id="generateGifs">Show Top GIFs</button>
     </section>
     <section>
-        <div id="resutlGifs"></div>
+        <div id="resutlGifs" class="card-style"></div>
     </section>
 </main>
 
@@ -43,16 +45,21 @@
     <script>
         const getGifsImport = ( gif ) => {
             const { gif_url, likes } = gif;
-            return `<article>
+            return `<article class="article-style">
                  <img src=${ gif_url } alt="gify" class="img-style"/>
-                 <span>${ likes }</span>
+                 <span class="top-space">🩷 ${ likes }</span>
                 </article>`
         }
         const handleGifsClick = () => {
             const selectedCategory = $( "selectCategory" ).value;
             const databaseMatch = vibeBoardDB( { category: selectedCategory } ).get();
             const resutlGifs = databaseMatch.map( getGifsImport )
-            $( "resutlGifs" ).innerHTML = resutlGifs.join( "" )
+            if ( resutlGifs.length === 0 ) {
+                $( "resultGifs" ).innerHTML = "No gifs found"
+            } else {
+                $( "resutlGifs" ).innerHTML = resutlGifs.join( "" )
+            }
+
         }
         const $ = ( id ) => document.getElementById( id );
         $( "generateGifs" ).addEventListener( "click", handleGifsClick )
