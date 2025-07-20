@@ -54,8 +54,70 @@
         </section>
     </main>
     <script>
+        const getNextId = () => {
+            const newId = vibeBoardDB().get().length + 1;
+            return newId;
+        }
         const $ = ( id ) => document.getElementById( id )
+
+        const addGifsToDb = () => {
+            const resultElement = $( "resultAdd" );
+            const title = $( "inputTitle" ).value;
+            const description = $( "inputDescription" ).value;
+            const category = $( "selectCategory" ).value;
+            const gif_url = $( "gif_url" ).value;
+            /* Whatever user selected */
+            const ratingElement = document.querySelector(
+                'input[name="rating"]:checked'
+            );
+            const rating = ratingElement.value;
+            if ( !title || !description || !category || !gif_url || !rating ) {
+                resultElement.innerText = "Invalid Credentionals, all field !necessory"
+                return;
+            }
+            const gifsDetails = {
+                gif_id: getNextId(),
+                title,
+                description,
+                category,
+                gif_url,
+                rating,
+                likes: 0,
+                created_at: new Date(),
+            }
+            vibeBoardDB.insert( gifsDetails );
+            resultElement.innerText = "➡️ Add Data Successfully!"
+            $("inputTitle").value = "";
+        }
+        $( "handleClick" ).addEventListener( "click", addGifsToDb )
     </script>
 </body>
 
 </html>
+
+<!-- 
+  @NOTES::::
+  1)
+  -fieldset: whatever containt here there are in groups
+  -Attach: input field -Attach to label how it would be 
+   add for that would be one
+  -Name should be same so we can guess it it is belong from this
+   here, in this case "rating" 
+  -checked: by using checked attribute we can by default select
+  -radio: for rating element we look for "name" it make sure all 
+   same so, we use name attribute insted getElementById to get element
+  -here,for rating ele we not use getElementById 
+  -we use .querySelector('input[name="rating"]:checked') we don't want every field
+   we want only user selected :checked. it present all redio btn
+ -->
+<!--2)
+-Now, we read value in console.log (..)
+-it's time to inject/add into Database all data 
+-Our main data is array of object so that we've to 
+put new object with all datas e.g title,description,category
+gifUrl,rating into the array so let's create an array;
+go to file global-taffy-sync see id which is incremented by +1
+key should always same make sure similar like Database
+if key-value pair same no need write twice sufficient with one e.g title,
+if you don't have like initialized with 0 by default
+-->
