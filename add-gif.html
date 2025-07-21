@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <script src="https://cdn.jsdelivr.net/npm/taffydb/taffy-min.js"></script>
     <script src="js/global-taffy-sync.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -53,44 +54,46 @@
             <div id="resultAdd"></div>
         </section>
     </main>
-    <script>
-        const getNextId = () => {
-            const newId = vibeBoardDB().get().length + 1;
-            return newId;
-        }
-        const $ = ( id ) => document.getElementById( id )
+    <footer class="container align-footer">
+        <small>Go from here to know me <a href="https://github.com/Sourabhpande532">Github</a></small>
+        <script>
+            const getNextId = () => {
+                const newId = vibeBoardDB().get().length + 1;
+                return newId;
+            }
+            const $ = ( id ) => document.getElementById( id )
 
-        const addGifsToDb = () => {
-            const resultElement = $( "resultAdd" );
-            const title = $( "inputTitle" ).value;
-            const description = $( "inputDescription" ).value;
-            const category = $( "selectCategory" ).value;
-            const gif_url = $( "gif_url" ).value;
-            /* Whatever user selected */
-            const ratingElement = document.querySelector(
-                'input[name="rating"]:checked'
-            );
-            const rating = ratingElement.value;
-            if ( !title || !description || !category || !gif_url || !rating ) {
-                resultElement.innerText = "Invalid Credentionals, all field !necessory"
-                return;
+            const addGifsToDb = () => {
+                const resultElement = $( "resultAdd" );
+                const title = $( "inputTitle" ).value;
+                const description = $( "inputDescription" ).value;
+                const category = $( "selectCategory" ).value;
+                const gif_url = $( "gif_url" ).value;
+                /* Whatever user selected */
+                const ratingElement = document.querySelector(
+                    'input[name="rating"]:checked'
+                );
+                const rating = ratingElement.value;
+                if ( !title || !description || !category || !gif_url || !rating ) {
+                    resultElement.innerText = "Invalid Credentionals, all field !necessory"
+                    return;
+                }
+                const gifsDetails = {
+                    gif_id: getNextId(),
+                    title,
+                    description,
+                    category,
+                    gif_url,
+                    rating,
+                    likes: 0,
+                    created_at: new Date(),
+                }
+                vibeBoardDB.insert( gifsDetails );
+                resultElement.innerText = "➡️ Add Data Successfully!"
+                $( "inputTitle" ).value = "";
             }
-            const gifsDetails = {
-                gif_id: getNextId(),
-                title,
-                description,
-                category,
-                gif_url,
-                rating,
-                likes: 0,
-                created_at: new Date(),
-            }
-            vibeBoardDB.insert( gifsDetails );
-            resultElement.innerText = "➡️ Add Data Successfully!"
-            $("inputTitle").value = "";
-        }
-        $( "handleClick" ).addEventListener( "click", addGifsToDb )
-    </script>
+            $( "handleClick" ).addEventListener( "click", addGifsToDb )
+        </script>
 </body>
 
 </html>

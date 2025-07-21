@@ -43,30 +43,32 @@
             <div id="showGifsCard" class="card-style"></div>
         </section>
     </main>
-    <script>
-        const $ = ( id ) => document.getElementById( id );
-        const showGifsCards = ( detailsGif ) => {
-            const { title, gif_url, description, likes } = detailsGif;
-            return `<article class="article-style">
+    <footer class="container align-footer">
+        <small>Go from here to know me <a href="https://github.com/Sourabhpande532">Github</a></small>
+        <script>
+            const $ = ( id ) => document.getElementById( id );
+            const showGifsCards = ( detailsGif ) => {
+                const { title, gif_url, description, likes } = detailsGif;
+                return `<article class="article-style">
                 <img src=${ gif_url } alt=${ title } class="img-style" />
                 <h3>${ title }</h3>
                 <p>${ description }</p>
                 <span class="top-space">🩷 ${ likes }</span>
                 </article>`
-        }
-        const showGifsByCategory = () => {
-            const selectedCategory = $( "categorySelect" ).value;
-            const importGifs = vibeBoardDB( { category: selectedCategory } ).get();
-            const displayCards = importGifs.map( showGifsCards )
-            if ( displayCards.length === 0 ) {
-                $( "showGifsCard" ).innerHTML = `<p>No Gif were found</gif>`
-            } else {
-                $( "showGifsCard" ).innerHTML = displayCards.join( "" );
             }
+            const showGifsByCategory = () => {
+                const selectedCategory = $( "categorySelect" ).value;
+                const importGifs = vibeBoardDB( { category: selectedCategory } ).get();
+                const displayCards = importGifs.map( showGifsCards )
+                if ( displayCards.length === 0 ) {
+                    $( "showGifsCard" ).innerHTML = `<p>No Gif were found</gif>`
+                } else {
+                    $( "showGifsCard" ).innerHTML = displayCards.join( "" );
+                }
 
-        }
-        document.getElementById( "processGifs" ).addEventListener( "click", showGifsByCategory )
-    </script>
+            }
+            document.getElementById( "processGifs" ).addEventListener( "click", showGifsByCategory )
+        </script>
 </body>
 
 </html>
